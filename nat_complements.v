@@ -62,7 +62,7 @@ Lemma Diff :
 unfold not in |- *; intros A f a b H H0 H1; elim H0; elim H1; auto with v62.
 Qed.
 
-(*** Replace "Apply h;Auto with v62" by "auto" when the Type of h is False : ***)
+(*** Replace "apply h;auto with v62" by "auto" when the Type of h is False : ***)
 
 Lemma n_False : ~ False.
 auto with v62.
@@ -91,7 +91,7 @@ right; discriminate.
 (*... case y0=(S y1)*)
 intros y1 h; elim (H y1); intros.
 (*... ... case y=y1*)
-auto with v62. (*Apply eq_S*)
+auto with v62. (*apply eq_S*)
 (*case not y=y1*)
 right; simplify_eq; auto with v62.
 Qed.
@@ -108,7 +108,7 @@ Lemma ind_leS :
  forall (n : nat) (P : nat -> Set),
  P 0 -> (forall p : nat, (forall q : nat, q <= p -> P q) -> P (S p)) -> P n.
 intros n P; cut ((forall m : nat, m <= n -> P m) -> P n).
-2: auto with v62. (*Apply le_n*)
+2: auto with v62. (*apply le_n*)
 intros h h0 h1; apply h.
 elim n.
 (*case n=O*)
@@ -159,11 +159,11 @@ simple induction n.
 auto with v62.
 (*case n=(S y)*)
 simple induction p.
-auto with v62.           (*Apply le_Sn_O*)
+auto with v62.           (*apply le_Sn_O*)
 intros y0 le_or_not_le; elim (H y0).
-auto with v62.             (*Apply le_n_S*)
+auto with v62.             (*apply le_n_S*)
 intro not_le_n0_y0; right; unfold not in |- *.
-intros; elim not_le_n0_y0; auto with v62.        (*Apply le_S_n*)
+intros; elim not_le_n0_y0; auto with v62.        (*apply le_S_n*)
 Qed.
 
 Lemma le_decP : forall n p : nat, n <= p \/ ~ n <= p.
