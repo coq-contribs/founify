@@ -1,0 +1,10 @@
+Name: unification
+Title: Correctness and extraction of the unification algorithm
+Author: Joseph Rouyer
+Institution: Centre de Recherche en Informatique de Nancy (CRIN)
+Description:
+A notion of terms based on symbols without fixed arities is defined
+and an extended unification problem is proved solvable on these terms.
+An algorithm, close from Robinson algorithm, can be extracted from the
+proof.
+Keywords: First-order Unification, Robinson
