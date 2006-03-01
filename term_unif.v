@@ -317,7 +317,7 @@ unfold not in |- *; intros; apply H; auto with v62.
 cut (x0 <> x :>var).
 intros; apply (REMOVE_n_eq_IS_IN_LV_IS_IN_LV l0 l1 x); auto with v62.
 unfold not in |- *; intros; elim H4; auto with v62.
-(*Unfold not;Intros;Apply H;Auto with v62.*)
+(*unfold not;intros;apply H;auto with v62.*)
 intros; cut (x <> y :>var).
 intros; apply (REMOVE_n_eq_IS_IN_LV_IS_IN_LV l0 l1 x); auto with v62.
 unfold not in |- *; intros; apply H3; replace x with y; auto with v62.
@@ -421,7 +421,7 @@ intros; absurd (IS_IN_LV x l0); auto with v62.
 cut (Nilv = l0 :>listv).
 intros H5; elim H5; simpl in |- *; auto with v62.
 apply DIFFELNB_O; auto with v62.
-intros; auto with v62. (* Apply le_n_S ; Apply le_O_n *)
+intros; auto with v62. (* apply le_n_S ; apply le_O_n *)
 (* Case2 l=(Consv x l0) and (IS_IN_LV x l0) *)
 intros until n1; pattern n1 in |- *; apply (nat_case n1).
 intros h0 h1; elim h1; intros.
@@ -464,7 +464,7 @@ intros l n hyp; cut (diffelnb l n).
 2: apply DIFFELNB_diffelnb; auto with v62.
 intros h; elim h.
 (* Case1 :  l=Nilv *)
-auto with v62. (*Apply le_O_n*)
+auto with v62. (*apply le_O_n*)
 (* Case2 l=(Consv x l0) and (IS_IN_LV x l0) *)
 intros.
 apply H0 with l1; auto with v62.
@@ -526,9 +526,9 @@ Fixpoint list_var (t : quasiterm) : listv :=
 
 Goal forall (t : quasiterm) (x : var), IS_IN x t -> IS_IN_LV x (list_var t).
 simple induction t; simpl in |- *; intros; auto with v62.
-(*Case t=(V v) : Apply or_is_inror ; Assumption
-Case t=(C c) : Assumption
-Case t=(Root f y) : Apply H ; Assumption *)
+(*Case t=(V v) : apply or_is_inror ; assumption
+Case t=(C c) : assumption
+Case t=(Root f y) : apply H ; assumption *)
 (*Case t=(ConsArg y y0) *) 
 elim H1; intros.
 apply IS_IN_LV_Appv1; auto with v62.
@@ -1705,7 +1705,7 @@ min_unif g (Subst f t2) (Subst f t4) ->
 Unification (ConsArg t1 t2) (ConsArg t3 t4).
 intros; apply Unif_succeed with (fun x : var => Subst g (f x)); intros;
  auto with v62.
-(*Apply unif_comp;over_comp;under_comp;min_unif_comp*)
+(*apply unif_comp;over_comp;under_comp;min_unif_comp*)
 apply (idempotent_Fondamental (ConsArg t2 t4)); auto with v62.
 (*------------ Verifications on the terms:begin -------------*)
 apply term_subst_comp with t1 t2 t3 t4; auto with v62.
@@ -1773,7 +1773,7 @@ apply two_succes with f f0; replace (Subst f t2) with t2;
  replace (Subst f t4) with t4;
  unfold unif, over, under, idempotent, dom in |- *; 
  simpl in |- *; auto with v62.
-(*Apply eq_V_stab*)
+(*apply eq_V_stab*)
 intros; absurd (V y = f y :>quasiterm); auto with v62.
 unfold min_unif in |- *; intros.
 apply less_subst_init with g.
@@ -1810,11 +1810,11 @@ intros; apply Unif_DIFFELNB_O; auto with v62.
    (************** Case with p+1 different variables, *******************)
    (**************** induction on u1, then on u2 : *********************)
    (***************************************************************)
-simple induction u1; auto with v62. (*Apply UnifV1;UnifC1*)
+simple induction u1; auto with v62. (*apply UnifV1;UnifC1*)
 (*Case u1 = (Root ...) : *)
-simple induction u2; auto with v62. (*Apply UnifV2;UnifC2;UnifRoot;Decomp_fail;Fail_hd6*)
+simple induction u2; auto with v62. (*apply UnifV2;UnifC2;UnifRoot;Decomp_fail;Fail_hd6*)
 (*Case u1 = (ConsArg ...) : *)
-simple induction u2; auto with v62. (*Apply UnifV2;UnifC2;Decomp_fail;Fail_hd5*)
+simple induction u2; auto with v62. (*apply UnifV2;UnifC2;Decomp_fail;Fail_hd5*)
 intros.
    (**      1 subgoal                                                *)
    (**      (Unification (ConsArg q q0) (ConsArg q1 q2))              *)
@@ -1847,7 +1847,7 @@ elim (DIFFELNB_ConsArg_ConsArg13_le q q0 q1 q2 (S p) H4 p0 H5); intros.
    (***************************************************************)
 elim (H p0 (le_S_n p0 p a) q q1 H5); intros.
 2: auto with v62.
-(*Apply UnifConsArgfail1*)
+(*apply UnifConsArgfail1*)
 
    (***************************************************************)
    (******** the unifier f of f and y1 is either the identity, ***********) 
@@ -1924,7 +1924,7 @@ apply (H1 q2); elim b0; auto with v62.
    (********** which proves (Unification y y1), **********************)
    (********2) one proceeds after exactly like above. ******************)
    (***************************************************************)
-elim (H0 q1); elim b; auto with v62; intros. (*Apply UnifConsArgfail1*)
+elim (H0 q1); elim b; auto with v62; intros. (*apply UnifConsArgfail1*)
 elim (ident_or_notS (ConsArg q q1) f o); intros.
 elim a; intros x H6.
 
@@ -1947,7 +1947,7 @@ exists x; auto with v62.
 apply eq_V_stab3 with f; auto with v62.
 elim (DIFFELNBor (list_var (ConsArg q0 q2))); intros p1 H6.
 elim (DIFFELNB_ConsArg_ConsArg24_le q q0 q1 q2 (S p) H4 p1 H6); intros.
-apply (H p1); auto with v62. (*Apply Apply le_S_n*)
+apply (H p1); auto with v62. (*apply le_S_n*)
 apply (H1 q2); elim b1; auto with v62.
 Save proof_unif.
 
