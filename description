@@ -1,6 +1,6 @@
 Name: unification
 Title: Correctness and extraction of the unification algorithm
-Author: Joseph Rouyer
+Author: Jocelyne Rouyer
 Institution: Centre de Recherche en Informatique de Nancy (CRIN)
 Description:
 A notion of terms based on symbols without fixed arities is defined
