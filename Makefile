@@ -118,7 +118,7 @@ unif.ml: term_unif.vo
 	$(COQBIN)coqtop $(COQFLAGS) -silent -batch -load-vernac-source extract.v
 
 unif: unif.ml
-	ocamlopt -pp camlp4o -o unif unif.mli unif.ml main.ml
+	$(CAMLOPTLINK) -pp '$(CAMLBIN)$(CAMLP4)o' -o unif unif.mli unif.ml main.ml
 
 test: unif
 	@echo '******* test: unifying two terms *******'
