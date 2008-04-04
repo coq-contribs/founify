@@ -1,3 +1,4 @@
+-R . FOUnify
 term_unif.v
 nat_term_eq_quasiterm.v
 nat_complements.v

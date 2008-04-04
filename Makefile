@@ -23,9 +23,9 @@
 #                       #
 #########################
 
-OCAMLLIBS:=-I .
-COQLIBS:=-I . 
-COQDOCLIBS:=
+OCAMLLIBS:=
+COQLIBS:= -R . FOUnify
+COQDOCLIBS:=-R . FOUnify
 
 ##########################
 #                        #
@@ -79,15 +79,9 @@ GFILES:=$(VFILES:.v=.g)
 HTMLFILES:=$(VFILES:.v=.html)
 GHTMLFILES:=$(VFILES:.v=.g.html)
 
-all: term_unif.vo\
-  nat_term_eq_quasiterm.vo\
-  nat_complements.vo\
-  listv_is_in_lv.vo\
-  is_in_quasiterm_term_subst.vo\
-  unif.ml\
+all: $(VOFILES) unif.ml\
   unif\
   test
-
 spec: $(VIFILES)
 
 gallina: $(GFILES)
@@ -133,8 +127,6 @@ test: unif
 
 .PHONY: all opt byte archclean clean install depend html
 
-.SUFFIXES: .v .vo .vi .g .html .tex .g.tex .g.html
-
 %.vo %.glob: %.v
 	$(COQC) -dump-glob $*.glob $(COQDEBUG) $(COQFLAGS) $*
 
@@ -156,13 +148,8 @@ test: unif
 %.g.html: %.v %.glob
 	$(COQDOC) -glob-from $*.glob -html -g $< -o $@
 
-%.v.d.raw: %.v
-	$(COQDEP) -slash $(COQLIBS) "$<" > "$@"\
-	  || ( RV=$$?; rm -f "$@"; exit $${RV} )
-
-%.v.d: %.v.d.raw
-	$(HIDE)sed 's/\(.*\)\.vo[[:space:]]*:/\1.vo \1.glob:/' < "$<" > "$@" \
-	  || ( RV=$$?; rm -f "$@"; exit $${RV} )
+%.v.d: %.v
+	$(COQDEP) -glob -slash $(COQLIBS) "$<" > "$@" || ( RV=$$?; rm -f "$@"; exit $${RV} )
 
 byte:
 	$(MAKE) all "OPT:=-byte"
