@@ -1,6 +1,6 @@
 Name: FOUnify
 Title: Correctness and extraction of the unification algorithm
-Author: Jocelyne Rouyer
+Author: Joseph Rouyer
 Institution: Centre de Recherche en Informatique de Nancy (CRIN)
 Description:
 A notion of terms based on symbols without fixed arities is defined
