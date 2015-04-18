@@ -4,11 +4,11 @@ nat_term_eq_quasiterm.v
 nat_complements.v
 listv_is_in_lv.v
 is_in_quasiterm_term_subst.v
--custom "$(COQBIN)coqtop $(COQFLAGS) -silent -batch -load-vernac-source extract.v" term_unif.vo unif.ml
--custom "$(CAMLOPTLINK) -pp '$(CAMLBIN)$(CAMLP4)o' -o unif unif.mli unif.ml main.ml" unif.ml unif
--custom
+-extra unif.ml term_unif.vo
+       "$(COQBIN)coqtop $(COQFLAGS) -silent -batch -load-vernac-source extract.v"
+-extra unif unif.ml
+       "$(CAMLOPTLINK) -pp '$(CAMLP4O)' -o unif unif.mli unif.ml main.ml"
+-extra test unif
         "@echo '******* test: unifying two terms *******'
 	./unif 'f(g(x),y)' 'f(y,g(h(t)))'
 	@echo '************** End of test ****************'"
-unif test
-
