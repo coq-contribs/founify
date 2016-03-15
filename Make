@@ -1,9 +1,11 @@
 -R . FOUnify
+
 term_unif.v
 nat_term_eq_quasiterm.v
 nat_complements.v
 listv_is_in_lv.v
 is_in_quasiterm_term_subst.v
+
 -extra unif.ml term_unif.vo
        "$(COQBIN)coqtop $(COQFLAGS) -silent -batch -load-vernac-source extract.v"
 -extra unif unif.ml
