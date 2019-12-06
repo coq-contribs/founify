@@ -5,12 +5,3 @@ nat_term_eq_quasiterm.v
 nat_complements.v
 listv_is_in_lv.v
 is_in_quasiterm_term_subst.v
-
--extra unif.ml term_unif.vo
-       "$(COQBIN)coqtop $(COQFLAGS) -R . FOUnify -silent -batch -load-vernac-source extract.v"
--extra unif unif.ml
-       "$(CAMLOPTLINK) -pp '$(CAMLP5O)' -o unif unif.mli unif.ml main.ml"
--extra test unif
-        "@echo '******* test: unifying two terms *******'
-	./unif 'f(g(x),y)' 'f(y,g(h(t)))'
-	@echo '************** End of test ****************'"

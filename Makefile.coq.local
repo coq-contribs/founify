@@ -1,0 +1,12 @@
+all: test
+
+unif.ml: term_unif.vo
+	$(COQBIN)coqtop $(COQFLAGS) -R . FOUnify -silent -batch -load-vernac-source extract.v
+
+unif: unif.ml
+	$(CAMLOPTLINK) -pp "camlp5o pr_o.cmo" -o unif unif.mli unif.ml main.ml
+
+test: unif
+	@echo '******* test: unifying two terms *******'
+	./unif 'f(g(x),y)' 'f(y,g(h(t)))'
+	@echo '************** End of test ****************'
